@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gayathri B | Poet & Author</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+:root {
+  --bg: #e8e0fb;
+  --text: #1e1e2f;
+  --accent: #8b7bbd;
+}
+
+/* BODY  */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Lora', serif;
+  background: black;
+  color: var(--text);
+  perspective: 2000px;
+  overflow: hidden;
+}
+
+#winter-field {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+
+/* Book */
+.book {
+  width: 80vw;
+  max-width: 900px;
+  height: 80vh;
+  position: relative;
+  transform-style: preserve-3d;
+
+  display: flex;
+  gap: 100px;
+  margin-top: 1px;
+  margin-left: 100px;
+}
+
+
+
+/* PAGE CONTAINER */
+.page {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform-origin: left;
+  transition: transform 1s ease, box-shadow 0.4s ease;
+
+  background: var(--bg);
+  border-radius: 8px;
+  border: 3px solid #7966b3;
+  overflow: hidden;
+}
+
+.page:hover {
+  box-shadow:
+    0 0 30px #fff,
+    0 12px 22px #fff;
+}
+
+.page .front,
+.page .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+}
+
+.page .back {
+  transform: rotateY(180deg);
+}
+
+.page.flipped {
+  transform: rotateY(-180deg);
+}
+
+
+
+/* CONTENT STYLING */
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+}
+
+.snippet {
+  font-style: italic;
+  line-height: 1.8;
+}
+
+.snippet2 {
+  font-style: italic;
+  line-height: 1.5;
+  font-size: 1.2rem;
+}
+
+/* NAV BUTTONS */
+.nav-btn {
+  position: absolute;
+  bottom: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid var(--accent);
+  background: none;
+  color: var(--accent);
+  transition: 0.3s;
+}
+
+.nav-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
+
+.close-book {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  padding: 8px 14px;
+  border: 1px solid var(--accent);
+  background: none;
+  color: var(--accent);
+  cursor: pointer;
+}
+/* COVER PAGE */
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-right {
+  max-width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#cover-stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.cover-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover-front > *:not(canvas) {
+  position: relative;
+  z-index: 1;
+}
+
+.cover-front h1 {
+  font-size: 3.6rem;
+  margin-bottom: 20px;
+}
+
+.cover-front p {
+  font-style: italic;
+  margin-bottom: 30px;
+}
+
+.cover-tagline {
+  font-style: italic;
+  font-size: 1.3rem;
+  opacity: 0.85;
+  margin-bottom: 14px;
+}
+
+#cover.flipped .front {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.highlight {
+  color: #080709;
+  text-shadow:    0 0 6px rgba(120, 90, 200, 0.9),
+    0 0 12px rgba(120, 90, 200, 0.7),
+    0 0 20px rgba(120, 90, 200, 0.5);
+  font-weight: 500;
+}
+
+.intro-box {
+  position: relative;
+  width: 400px;
+  height: 60px;
+  margin-bottom: 220px;
+  border: black 1px solid;
+  overflow: visible;
+}
+
+.hi-text,
+.name-text {
+  position: absolute;
+  opacity: 0;
+  font-size: 2rem;
+  color: #8b7bbd;
+}
+
+.hi-text {
+  position: absolute;
+  opacity: 0;
+  animation: hiCycle 4s infinite;
+  color: #8b7bbd;
+  margin-top: 10px;
+}
+
+.name-text {
+  position: absolute;
+  opacity: 0;
+  animation: nameCycle 4s infinite;
+  font-style: italic;
+  color: #8b7bbd;
+  margin-top: 10px;
+}
+@keyframes hiCycle {
+  0% { opacity: 0; transform: translateY(25px); }
+  10% { opacity: 1; transform: translateY(0); }
+  40% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes nameCycle {
+  50% { opacity: 0; transform: translateX(15px); }
+  60% { opacity: 1; transform: translateX(0); }
+  90% { opacity: 1; }
+}
+.author-vdo {
+  margin-left: 60px;
+  margin-bottom: 80px;
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+}
+
+/* PAGE 1 INTRODUCTION PAGE*/
+.hero-content2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.hero-left2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-right2 {
+  max-width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-right2 img {
+  width: 240px;
+  height: 255px;
+  border-radius: 5%;
+  margin-right: 20px;
+}
+
+.blinking-eye { display: inline-block; animation: blink 1s infinite; transform-origin: center; }
+@keyframes blink {0%,92%,100%{transform:scaleY(1)} 95%{transform:scaleY(0.1)}}
+
+/* PAGE2 ABOUT THE BOOK */
+
+.book1 {
+  display: flex;
+  gap: 100px;
+  margin-top: 1px;
+  margin-left: 100px;
+}
+
+.img-book {
+  width: 250px;
+  height: 350px;
+  border-radius: 6px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+  margin-left: 4%;
+  transform: translateY(-10px);
+}
+
+.book-text {
+  max-width: 360px;
+  text-align: left;
+  transform: translateY(40px);
+}
+
+.book-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  margin-bottom: 6px;
+}
+
+.book-text p {
+  font-style: italic;
+  line-height: 1.7;
+}
+    .btn {
+      padding: 12px 32px;
+      border: 1px solid var(--accent);
+      background: none;
+      color: var(--accent);
+      cursor: pointer;
+      transition: 0.4s ease;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+.author2-vdo {
+  margin-left: 55%;
+  width: 280px;
+  height: 250px;
+  transform: translateY(-40px); /* move UP */
+  object-fit: cover;
+}
+
+/* PAGE 3 UNPUBLISHED WORKS SLIDER */
+
+.poem-slider {
+  position: relative;
+  width: 100%;
+  max-width: 850px;
+  height: 420px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* SLIDES */
+.poem-slide {
+  position: absolute;
+  inset: 0;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.02);
+}
+
+/* ACTIVE SLIDE */
+.poem-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+/* CONTENT STACK */
+.poem-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  text-align: center;
+
+}
+
+/* TITLE */
+.poem-content h3 {
+  font-size: 1.6rem;
+  letter-spacing: 0.6px;
+  font-weight: 500;
+
+}
+
+
+
+/* SLIDER CONTROLS */
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 2.4rem;
+  cursor: pointer;
+  color: var(--accent);
+  z-index: 5;
+}
+
+.slider-btn.prev {
+  left: 12px;
+}
+
+.slider-btn.next {
+  right: 12px;
+}
+
+.slider-btn:hover {
+  transform: translateY(-50%) scale(1.2);
+}
+.btn-poem {
+  padding: 12px 32px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: black;
+  cursor: pointer;
+  transition: 0.4s ease;
+}
+
+.btn-poem:hover {
+  background: black;
+  color: var(--accent);
+}
+/* CONTAINER */
+.yin-yang-loop {
+  position: relative;
+  width: 240px;
+  height: 170px;
+  margin: 40px auto;
+}
+
+/* BASE */
+.yin {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+/* WHITE */
+.yin.white {
+  left: 0;
+  background: rgba(255, 255, 255, 0.9);
+  animation: whiteIn 4s ease-in-out infinite;
+}
+
+/* BLACK */
+.yin.black {
+  right: 0;
+  background: rgba(0, 0, 0, 0.85);
+  animation: blackIn 4s ease-in-out infinite;
+}
+
+/* GREY (MERGED STATE) */
+.yin.grey {
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  background: rgba(150, 150, 150, 0.7);
+  animation: greyMerge 4s ease-in-out infinite;
+}
+
+/* ANIMATIONS */
+
+@keyframes whiteIn {
+  0% {
+    opacity: 0;
+    transform: translateX(35%) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-2%) scale(1);
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes blackIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-35%) scale(0.8);
+  }
+  30% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(2%) scale(1);
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes greyMerge {
+  0%,
+  45% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.6);
+  }
+  55% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  75% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.9);
+  }
+}
+.paradox-container {
+  position: relative;
+  width: 400px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* COMMON TEXT STYLE */
+.paradox-layer {
+  position: absolute;
+  font-size: 3rem;
+  letter-spacing: 6px;
+  font-weight: 500;
+  color: rgba(32, 32, 142, 0.7);
+  animation-duration: 6s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* ZOOMING IN */
+.layer-in {
+  animation-name: zoomInParadox;
+}
+
+/* ZOOMING OUT */
+.layer-out {
+  animation-name: zoomOutParadox;
+}
+
+/* OFFSET LAYERS */
+.delay {
+  animation-delay: -4s;
+  opacity: 0.4;
+}
+
+/* KEYFRAMES */
+@keyframes zoomInParadox {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+    filter: blur(2px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(0);
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+@keyframes zoomOutParadox {
+  0% {
+    transform: scale(1.6);
+    opacity: 0;
+    filter: blur(2px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(0);
+  }
+  100% {
+    transform: scale(0.4);
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+.mother-cage-container {
+  position: relative;
+  width: 320px;
+  max-width: 90%;
+  margin: 0 auto;
+  overflow: hidden;
+  text-align: center;
+}
+
+.mother-img {
+  width: 320px;
+  height: 270px;
+  display: block;
+  filter: brightness(1);
+  transition: filter 2s ease;
+}
+
+/* CAGE */
+.cage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-evenly;
+  pointer-events: none;
+}
+
+.bar {
+  width: 6px;
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateY(-120%);
+  animation: dropBars 3s ease infinite alternate;
+}
+
+
+/* staggered bars */
+.bar:nth-child(1) { animation-delay: 0.2s; }
+.bar:nth-child(2) { animation-delay: 0.4s; }
+.bar:nth-child(3) { animation-delay: 0.6s; }
+.bar:nth-child(4) { animation-delay: 0.8s; }
+.bar:nth-child(5) { animation-delay: 1s; }
+.bar:nth-child(6) { animation-delay: 1.2s; }
+
+@keyframes dropBars {
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* IMAGE DIM AFTER CAGE */
+.mother-cage-container:hover .mother-img {
+  filter: brightness(0.6) grayscale(40%);
+}
+
+
+#page4-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+
+  pointer-events: none;
+  z-index: 1;
+
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+/* Activate animation */
+#page4-canvas.active {
+  opacity: 1;
+}
+
+/* PAGE 4 ABOUT AUTHOR */
+.author3-vdo {
+  margin-left: 70%;
+  width: 280px;
+  height: 250px;
+  transform: translateY(-300px); /* move UP */
+  object-fit: cover;
+}
+/* PAGE 5 CONTACT PAGE */
+.contact-sub {
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 30px;
+}
+
+.contact-form {
+  max-width: 320px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  padding: 10px 12px;
+  font-family: 'Lora', serif;
+  border: 1px solid var(--accent);
+  background: transparent;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.contact-form textarea {
+  resize: none;
+}
+
+.form-status {
+  margin-top: 15px;
+  text-align: center;
+  font-style: italic;
+  color: var(--accent);
+}
+/* ===========================
+          RESPONSIVE
+   =========================== */
+@media (max-width: 600px) {
+
+  /* BODY */
+  body {
+    height: auto;
+    overflow-y: auto;
+    align-items: flex-start;
+  }
+
+
+  /* BOOK */
+  .book {
+    width: 90vw;
+    height: 86vh;
+    margin: 0;
+    transform: translateY(2%);
+  }
+
+  /* PAGE */
+  .page .front,
+  .page .back {
+    padding: 18px;
+  }
+
+  /* NAV BUTTONS */
+  .nav-btn {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    bottom: 12px;
+  }
+
+  .prev-btn { left: 10px; }
+  .next-btn { right: 10px; }
+
+  .close-book {
+    top: 10px;
+    right: 10px;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+   /* COVER FRONT CONTAINER */
+  .cover-front {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+    padding: 24px 16px;
+    text-align: center;
+  }
+
+  /* TITLE */
+  .cover-front h1 {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  /* SUBTEXT / PARAGRAPH */
+  .cover-front p {
+    font-size: 1rem;
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+
+  /* TAGLINE */
+  .cover-tagline {
+    font-size: 1rem;
+    opacity: 0.85;
+    margin-bottom: 16px;
+    max-width: 280px;
+  }
+
+  /* STARS CANVAS FULL PAGE */
+  #cover-stars {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  /* CONTENT ABOVE STARS */
+  .cover-front > *:not(canvas) {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* WHEN COVER FLIPS */
+  #cover.flipped .front {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .author-vdo{
+    transform: translateY(70px);
+    width: 180px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+  }
+
+  /* HERO */
+  .hero-content {
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.2rem;
+    padding: 0;
+    text-align: center;
+  }
+
+  .hero-left {
+    align-items: center;
+  }
+
+  .hero-right {
+    max-width: 100%;
+  }
+
+  /* INTRO TEXT (HI / NAME) */
+  .intro-box {
+    width: 100%;
+    max-width: 260px;
+    height: 48px;
+    margin-bottom: 120px;
+  }
+
+  .hi-text,
+  .name-text {
+    font-size: 1.3rem;
+    left: 2%;
+
+    text-align: center;
+    white-space: nowrap;
+  }
+  .hi-text {
+    animation: hiCycle 4s infinite;
+    color: #8b7bbd;
+  }
+  @keyframes hiCycle {
+    0% { opacity: 0; transform: translateY(25px); }
+    10% { opacity: 1; transform: translateY(0); }
+    40% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @keyframes nameCycle {
+    50% { opacity: 0; transform: translateX(15px); }
+    60% { opacity: 1; transform: translateX(0); }
+    90% { opacity: 1; }
+  }
+  .hero-left {
+    align-items: top;
+  }
+  .hero-content2 {
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.2rem;
+    padding: 0;
+    text-align: center;
+  }
+
+  .hero-left2 {
+    align-items: center;
+  }
+
+  .hero-right2 {
+    max-width: 100%;
+  }
+  .snippet2 {
+  font-style: italic;
+  line-height: 1.5;
+  font-size: 0.8rem;
+  }
+  .hero-right2 img {
+    width: 200px;
+    height: auto;
+    margin: 0;
+  }
+
+  /* BOOK SECTION */
+ .book.book-1 {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 20%;
+  }
+
+  .img-book {
+    width: 200px;
+    height: 200px;
+    margin: 0;  
+
+  }
+
+  .book-text {
+    max-width: 100%;
+    text-align: center;
+    transform: translateX(-270px);
+    margin-right: 90%;
+    white-space: nowrap;
+  }
+
+  .book-text h3 {
+    font-size: 1.2rem;
+    transform: translateY(240px);
+  }
+  .book-text p {
+    font-size: 0.8rem;
+    transform: translateY(240px);
+  }
+  .btn {
+    padding: 10px 30px;
+    border: 1px solid var(--accent);
+    background: none;
+    color: var(--accent);
+    cursor: pointer;
+    transition: 0.4s ease;
+    margin-top: 240px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .btn:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* POEM SLIDER */
+  .poem-slider {
+    height: auto;
+    min-height: 300px;
+  }
+
+  .poem-content h3 {
+    font-size: 1.2rem;
+    white-space: nowrap;
+  }
+
+  .slider-btn {
+    font-size: 1.8rem;
+  }
+
+  /* PARADOX */
+  .paradox-container {
+    justify-content: center;
+    width: 240px;
+    height: 140px;
+    transform: translateY(50px);
+  }
+
+  .paradox-layer {
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+  }
+
+  /* YIN YANG */
+  .yin {
+    width: 170px;
+    height: 170px;
+  }
+    
+  @keyframes whiteIn {
+    0% {
+      opacity: 0;
+      transform: translateX(60%) scale(0.8);
+    }
+    20% {
+      opacity: 1;
+      transform: translateX(20%) scale(1);
+    }
+    50% {
+      opacity: 1;
+    }
+    70% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes blackIn {
+    0% {
+      opacity: 0;
+      transform: translateX(-60%) scale(0.8);
+    }
+    30% {
+      opacity: 1;
+      transform: translateX(-20%) scale(1);
+    }
+    50% {
+      opacity: 1;
+    }
+    70% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes greyMerge {
+    0%,
+    45% {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.6);
+    }
+    55% {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+    75% {
+      opacity: 1;
+      filter: blur(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.9);
+    }
+  }
+  /* ABOUT AUTHOR */
+  .snippet {
+  font-style: italic;
+  line-height: 1.8;
+  font-size: 0.8rem;
+  }
+  .author2-vdo{
+    width: 175px;
+    height: auto;
+    transform: translateY(-50px);
+    display: flex;
+    margin-left: 125px;
+  }
+
+  /* CONTACT */
+  .contact-form {
+    width: 70%;
+    max-width: 70%;
+  }
+
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form select {
+    font-size: 0.85rem;
+  }
+  .contact-form .btn{
+    padding: 10px 30px;
+    border: 1px solid var(--accent);
+    background: none;
+    color: var(--accent);
+    cursor: pointer;
+    transition: 0.4s ease;
+    transform: translateY(-240px);
+    display: flex;
+    justify-content: flex-end;
+  }
+  .author3-vdo {
+    width: 180px;
+    height: auto;
+    margin: 0 auto;
+    transform: translateY(-278px);
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 160px;
+  }
+
+  .btn:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+
+
+  /* MOTHER CAGE */
+  .mother-img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .bar {
+    width: 4px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+
+  body {
+    height: auto;
+    overflow-y: auto;
+  }
+  #winter-field {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .book {
+    width: 85vw;
+    height: 85vh;
+    margin: 0 auto;
+    transform: translateY(0);
+  }
+
+  .page .front,
+  .page .back {
+    padding: 26px;
+  }
+
+  /* HERO */
+  .hero-content,
+  .hero-content2 {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .hero-left,
+  .hero-left2 {
+    align-items: center;
+  }
+
+  .hero-right,
+  .hero-right2 {
+    max-width: 100%;
+  }
+
+ /* INTRO TEXT (HI / NAME) */
+  .intro-box {
+    width: 100%;
+    max-width: 280px;
+    height: 50px;
+    margin-top: 25%;
+  }
+
+  .hi-text,
+  .name-text {
+    font-size: 1.5rem;
+    left: 2%;
+
+    text-align: center;
+    white-space: nowrap;
+  }
+  .hi-text {
+    animation: hiCycle 4s infinite;
+    color: #8b7bbd;
+  }
+  @keyframes hiCycle {
+    0% { opacity: 0; transform: translateY(25px); }
+    10% { opacity: 1; transform: translateY(0); }
+    40% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @keyframes nameCycle {
+    50% { opacity: 0; transform: translateX(15px); }
+    60% { opacity: 1; transform: translateX(0); }
+    90% { opacity: 1; }
+  }
+  .cover-front p {
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+
+  .cover-tagline {
+    font-size: 1.5rem;
+    opacity: 0.85;
+    margin-bottom: 16px;
+    max-width: 280px;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .author-vdo {
+    width: 220px;
+    height: auto;
+    margin: 0;
+    display: block;
+    transform: translateY(-50%);
+  }
+  .hero-left2 {
+    align-items: center;
+    margin-top: 20%;
+  }
+
+  .hero-right2 {
+    max-width: 100%;
+    margin-bottom: 30%;
+  }
+  .hero-right2 img {
+    width: 300px;
+    height: auto;
+    margin: 0;
+  }
+  .snippet2 {
+    font-style: italic;
+    line-height: 1.5;
+    font-size: 1.5rem;
+  }
+
+  /* BOOK SECTION */
+  .book1.book-1 {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 20%;
+    margin-right: 10%;
+  }
+
+  .img-book {
+    width: 220px;
+    height: auto;
+  }
+
+  .book-text {
+    text-align: center;
+    max-width: 90%;
+    white-space: normal;
+    transform: none;
+    margin: 0;
+  }
+
+  .book-text h3 {
+    font-size: 1.4rem;
+    margin-top: 10px;
+  }
+
+  .book-text p {
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    margin-top: 12px;
+    display: inline-block;
+  }
+
+  /* AUTHOR VIDEOS */
+  .author2-vdo {
+    width: 220px;
+    height: auto;
+    margin-top: 50px;
+    display: block;
+    transform: translateX(10%);
+  }
+  .author3-vdo {
+    width: 220px;
+    height: auto;
+    margin-top: 50px;
+    display: block;
+    transform: translateX(2%);
+  }
+
+  /* POEM SLIDER */
+  .poem-content h3 {
+    font-size: 1.4rem;
+    white-space: normal;
+  }
+
+  .slider-btn {
+    font-size: 2rem;
+  }
+
+  /* CONTACT */
+  .contact-form {
+    width: 80%;
+  }
+
+}
+
+
+@media (min-width: 901px) and (max-width: 1200px) {
+
+  .book {
+    width: 80vw;
+    height: 80vh;
+  }
+
+  #winter-field {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .page .front,
+  .page .back {
+    padding: 34px;
+  }
+
+  /* HERO */
+  .hero-content,
+  .hero-content2 {
+    flex-direction: row;
+    gap: 2rem;
+    text-align: left;
+  }
+
+  .hero-left,
+  .hero-left2 {
+    align-items: flex-start;
+  }
+
+  .hero-right img,
+  .hero-right2 img {
+    width: 260px;
+  }
+
+  /* INTRO TEXT */
+  .intro-box {
+    max-width: 360px;
+    height: 60px;
+    margin-bottom: 180px;
+  }
+
+  .hi-text,
+  .name-text {
+    font-size: 1.8rem;
+  }
+
+  /* BOOK SECTION */
+  .book1.book-1 {
+    flex-direction: row;
+    align-items: center;
+    gap: 2.2rem;
+    margin-top: 30%;
+  }
+
+  .img-book {
+    width: 340px;
+    height: auto;
+  }
+
+  .book-text {
+    max-width: 60%;
+    white-space: normal;
+    transform: none;
+    margin: 0;
+  }
+
+  .book-text h3 {
+    font-size: 1.5rem;
+  }
+
+  .book-text p {
+    font-size: 1rem;
+  }
+
+  .btn {
+    margin-top: 10px;
+  }
+  .poem-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    text-align: center;
+  }
+  .poem-slider {
+    margin-top: 50px;
+    width: 780px;
+    height: 780px;
+    font-size: 3rem;
+  }
+  .mother-img{
+    width: 100%;
+    height: 100%;
+  }
+  /* PARADOX */
+  .paradox-container {
+    width: 420px;
+    height: 480px;
+  }
+
+  .paradox-layer {
+    font-size: 3rem;
+  }
+  .yin {
+    width: 345px;
+    height: 345px;
+  }
+  .snippet {
+    font-size: 1.5rem;
+  }
+  /* CONTACT */
+  .contact-form {
+    width: 90%;
+  }
+  .author3-vdo {
+    width: 250px;
+    height: auto;
+    margin-top: 100px;
+    display: block;
+    transform: translateX(-80px);
+  }
+
+}
+
+
+
+</style>
+</head>
+<body>
+<canvas id="cover-stars"></canvas>
+
+
+<div class="book">
+  
+  <!-- COVER PAGE -->
+<div class="page" id="cover">
+  <div class="front">
+    
+    <div class="hero-content">
+      <div class="hero-left">
+
+        <!-- Intro animation -->
+        <div class="intro-box">
+          <span class="hi-text">&nbsp;&nbsp;Oh hey!</span>
+          <span class="name-text">&nbsp;&nbsp;Fancy seeing you here!</span>
+          <br><br><br><br><p class="cover-tagline">I am <b class="highlight">Gayathri Balaji<br><br></b>Welcome to my <b class="highlight">DiaryVerse</b> </p>
+            <p>where my thoughts, emotions and feelings<br> come to <b class="highlight">die</b> only to be <b class="highlight">re</b>born as <b class="highlight">verse!</b> </p>
+        </div>   
+      </div>
+        <div class="hero-right-video">
+          <video src="images/cover_page/avatar_cover_video.webm" class="author-vdo" autoplay loop muted playsinline>
+        </div>
+
+    </div>
+
+    <button class="nav-btn next-btn">Open Diary</button>
+  </div>
+
+  <div class="back">
+</div>
+
+</div>
+
+
+  <!-- PAGE 1 -->
+  <div class="page" id="page1">
+    <div class="front">
+      <canvas id="winter-field"></canvas>
+      <button class="close-book">Close</button>
+      <div class="hero-content2">
+        <div class="hero-left2">
+          <p class="snippet2">
+              They say the eyes never lie. <br>Every colour, every shape, every flutter of a lash, <br>And every soul behind it, carries a story.
+              <br>Only some witness the struggles, <br>Only few see the pain, <br>And only YOU know the WHOLE.
+
+              <br>The whole story lives in my eyes. 
+              <br>Can you read mine? <i class="fa-solid fa-eye blinking-eye"></i> <i class="fa-solid fa-eye blinking-eye"></i>
+
+          </p>
+        </div>
+        <div class="hero-right2">
+          <img src="images/author_img.jpg" class="author-img">
+        </div>
+      </div>
+      <button class="nav-btn next-btn">Next</button>
+    </div>
+
+
+    <div class="back"></div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page" id="page2">
+    <div class="front">
+    
+      <button class="close-book">Close</button>
+
+        <h2>Books</h2>
+
+        <div class="book1 book-1">
+          <img src="images/book-1_cover.jpg" class="img-book" alt="The Pendulum Petals">
+
+          <div class="book-text">
+            <h3>The Pendulum Petals</h3>
+            <p><em>A Poetry Through Time</em></p>
+            <br>
+            <a href="book-1.html" class="btn transition-link">More on this Book</a>
+          </div>
+        </div>
+
+        <button class="nav-btn prev-btn">Previous</button>
+        <button class="nav-btn next-btn">Next</button>
+      </div>
+
+    <div class="back"></div>
+  </div>
+<!-- PAGE 3 : UNPUBLISHED WORKS -->
+<div class="page" id="page-unpublished">
+  <div class="front">
+    <button class="close-book">Close</button>
+
+    <h2>Unpublished Archives </h2>
+    <p>Follow for more -> <a href="https://www.instagram.com/inked_by_g3?igsh=MWVmcHRsdHo5NnNuaA==" class="insta-handle"><i class="fa-brands fa-instagram"></i></a></p>
+    <div class="poem-slider">
+
+      <!-- POEM 1 -->
+      <div class="poem-slide active" data-poem="poem-1">
+        <div class="poem-content">
+          <h3><a href="poems.html#poem-1" class="btn-poem">Title : Bound by Obedience</a></h3>
+          <div class="mother-cage-container">
+            <img src="images/mother-child.jpeg" alt="Mother carrying child" class="mother-img">
+
+            <!-- Cage overlay -->
+            <div class="cage">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- POEM 2 -->
+      <div class="poem-slide" data-poem="poem-2">
+        <div class="poem-content">
+          <h3><a href="poems.html#poem-2" class="btn-poem">Title : Paradox</a></h3>
+
+          <!-- <img src="images/poem2.jpg" class="img-poem" alt="Poem artwork"> -->
+          <div class="paradox-container">
+            <div class="paradox-layer layer-in">PARADOX</div>
+            <div class="paradox-layer layer-out">PARADOX</div>
+            <div class="paradox-layer layer-in delay">PARADOX</div>
+            <div class="paradox-layer layer-out delay">PARADOX</div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!-- POEM 3 -->
+      <div class="poem-slide" data-poem="poem-3">
+        <div class="poem-content">
+          <h3><a href="poems.html#poem-3" class="btn-poem">Title : Grayness</a></h3>
+          <div class="yin-yang-loop">
+            <span class="yin white"></span>
+            <span class="yin black"></span>
+            <span class="yin grey"></span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Controls INSIDE slider -->
+    <button class="slider-btn prev" id="prevPoem">‹</button>
+    <button class="slider-btn next" id="nextPoem">›</button>
+
+    <button class="nav-btn prev-btn">Previous</button>
+    <button class="nav-btn next-btn">Next</button>
+  </div>
+</div>
+
+
+<!-- Rain canvas ONLY for this page -->
+<canvas id="rain-canvas"></canvas>
+
+
+  <!-- PAGE 4 -->
+
+  <div class="page" id="page4">
+    <div class="front">
+      <canvas id="page4-canvas"></canvas>
+      <button class="close-book">Close</button>
+      <h2>About the Author</h2>
+      <p class="snippet">
+        Hmm… About me. What do I tell about myself? Well, for starters, I’m the kind of person who refuses to sit idle—mostly because my brain likes to remind me that my bucket list is roughly the size of the night sky. So instead of doing nothing, I do the next best thing: I overthink with full commitment.
+
+    <br>I’m a working professional who also happens to be an author and poet, an artist who sketches with surprising competence, and a budding flutist.
+
+    At work, I’m the unofficial, unpaid meme engine that keeps my colleagues entertained. Outside work, I’m a wanderer at heart, a self‑proclaimed vagabond, and a photographer with a very specific niche: candid photos of still things. Yes, it’s a thing. Yes, I made it a thing.
+
+    I think that’s enough flexing for the introduction, let's keep the rest of my talents hidden. <br> 
+      </p>
+        <div class="page2-video">
+          <video src="images/avatar2.webm" class="author2-vdo" autoplay loop muted playsinline>
+        </div>
+      <button class="nav-btn prev-btn">Previous</button>
+      <button class="nav-btn next-btn">Next</button>
+    </div>
+    <div class="back"></div>
+  </div>
+
+  <!-- PAGE 5 : CONTACT -->
+<div class="page" id="page5">
+  <div class="front">
+    <button class="close-book">Close</button>
+
+    <div class="page-center">
+      <h2>Contact</h2>
+      <p class="contact-sub">
+        For collaborations, readings, or reader messages
+      </p>
+
+      <form id="contactForm" class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+
+        <select name="purpose" required>
+          <option value="">Purpose of Contact</option>
+          <option value="reader">Reader feedback</option>
+          <option value="collab">Collaboration</option>
+          <option value="event">Event</option>
+          <option value="other">Other</option>
+        </select>
+
+        <textarea name="message" rows="4" placeholder="Your message" required></textarea>
+
+        <button type="submit" class="btn contact-form">Send Message</button>
+      </form><br>
+
+      <p id="formStatus" class="form-status"></p>
+    </div>
+    <div class="page4-video">
+          <video src="images/avatar3.webm" class="author3-vdo" autoplay loop muted playsinline>
+      </div>
+
+    <button class="nav-btn prev-btn">Previous</button>
+  </div>
+
+  <div class="back"></div>
+</div>
+
+</div><br><br>
+<script>
+const pages = document.querySelectorAll(".page");
+let current = 0;
+
+// set z-index for stack
+pages.forEach((p, i) => {
+  p.style.zIndex = pages.length - i;
+});
+
+// Next button
+pages.forEach(page => {
+  const next = page.querySelector(".next-btn");
+  if (next) {
+    next.addEventListener("click", () => {
+      if (current < pages.length - 1) {
+        pages[current].classList.add("flipped");
+        current++;
+        togglePage4Animation(current);
+      }
+    });
+  }
+});
+
+// Prev button
+pages.forEach(page => {
+  const prev = page.querySelector(".prev-btn");
+  if (prev) {
+    prev.addEventListener("click", () => {
+      if (current > 0) {
+        current--;
+        pages[current].classList.remove("flipped");
+        togglePage4Animation(current);
+      }
+    });
+  }
+});
+
+// Close: reset book
+document.querySelectorAll(".close-book").forEach(btn => {
+  btn.addEventListener("click", () => {
+    pages.forEach(p => p.classList.remove("flipped"));
+    current = 0;
+    togglePage4Animation(current);
+  });
+});
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+  emailjs.init("SaMr9vCmv6HKsUxnX"); 
+</script>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const purpose = form.purpose.value;
+
+  const replies = {
+    reader: "Thank you for reading my work and sharing your thoughts.",
+    collab: "Thank you for reaching out regarding a collaboration. I will get back to you as soon as I can.",
+    event: "Thank you for considering me for an event. I will get back to you as soon as I can.",
+    other: "Thank you for writing. I’ve received your message. I will get back to you as soon as I can."
+  };
+
+  const params = {
+    name: form.name.value,
+    email: form.email.value,
+    purpose: purpose,
+    message: form.message.value,
+    auto_reply: replies[purpose]
+  };
+
+  emailjs.send("service_1p7ckyq", "template_2bcep7q", params)
+    .then(() => emailjs.send("service_1p7ckyq", "template_2yfoj0o", params))
+    .then(() => {
+      document.getElementById("formStatus").innerText =
+        "Thank you for your message. A confirmation has been sent.";
+      form.reset();
+    })
+    .catch(() => {
+      document.getElementById("formStatus").innerText =
+        "Something went wrong. Please try again later.";
+    });
+});
+</script>
+<script>
+window.addEventListener("load", () => {
+  const hash = window.location.hash;
+  if (!hash) return;
+
+  const pages = document.querySelectorAll(".page");
+  const targetPage = document.querySelector(hash);
+
+  if (!targetPage) return;
+
+  const targetIndex = [...pages].indexOf(targetPage);
+
+  // Reset first (important if user comes back again)
+  pages.forEach(p => p.classList.remove("flipped"));
+
+  // Flip pages until target
+  pages.forEach((page, index) => {
+    if (index < targetIndex) {
+      page.classList.add("flipped");
+    }
+  });
+
+  // Sync your current page tracker (if used)
+  if (typeof current !== "undefined") {
+    current = targetIndex;
+  }
+});
+</script>
+
+<script>
+  
+      // Snow Animation Code
+      function init() {
+          var portrait = document.getElementById('winter-field');
+          var context = portrait.getContext('2d');
+          var w = portrait.width = window.innerWidth; // Set canvas width to viewport width
+          var h = portrait.height = window.innerHeight; // Set canvas height to viewport height
+          var background = new Image();
+
+          var snowflakes = [];
+
+          function snowfall() {
+              context.clearRect(0, 0, w, h);
+              addSnowFlake();
+              snow();
+          }
+
+          function addSnowFlake() {
+              var x = Math.ceil(Math.random() * w);
+              var s = Math.random() * 3 + 2; // size range: 2 → 5
+
+              snowflakes.push({ "x": x, "y": 0, "s": s });
+          }
+
+          function snow() {
+              for (var i = 0; i < snowflakes.length; i++) {
+                  var snowflake = snowflakes[i];
+                  context.beginPath();
+                  context.fillStyle = "rgba(255, 255, 255, 0.7)";
+                  context.arc(snowflake.x, snowflakes[i].y += snowflake.s, snowflake.s / 2, 0, 2 * Math.PI);
+                  context.fill();
+                  if (snowflakes[i].y > h) {
+                      snowflakes.splice(i, 1);
+                  }
+              }
+          }
+
+          portrait.addEventListener('mousemove', function (event) {
+              var mouseX = event.clientX;
+              var mouseY = event.clientY;
+
+              for (var i = 0; i < snowflakes.length; i++) {
+                  var snowflake = snowflakes[i];
+                  var distance = Math.sqrt(Math.pow(mouseX - snowflake.x, 2) + Math.pow(mouseY - snowflake.y, 2));
+                  if (distance < 50) { // Adjust the value as needed for the hover radius
+                      snowflake.x += (snowflake.x - mouseX) * 0.1;
+                      snowflake.y += (snowflake.y - mouseY) * 0.1;
+                  }
+              }
+          });
+
+          setInterval(snowfall, 20);
+      }
+      window.onload = init;
+  
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const page = document.getElementById("page-unpublished");
+  if (!page) return;
+
+  const slides = page.querySelectorAll(".poem-slide");
+  const nextBtn = page.querySelector("#nextPoem");
+  const prevBtn = page.querySelector("#prevPoem");
+
+  let current = 0;
+
+  function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove("active"));
+    slides[index].classList.add("active");
+  }
+
+  nextBtn.addEventListener("click", () => {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  });
+
+  prevBtn.addEventListener("click", () => {
+    current = (current - 1 + slides.length) % slides.length;
+    showSlide(current);
+  });
+});
+
+
+</script>
+
+
+<script>
+  const canvas = document.getElementById('cover-stars');
+const ctx = canvas.getContext('2d');
+
+canvas.width = canvas.offsetWidth;
+canvas.height = canvas.offsetHeight;
+
+const stars = [];
+const numStars = 100; // number of stars
+
+// Create stars with random positions and sizes
+for(let i=0;i<numStars;i++){
+  stars.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2 + 1,
+    alpha: Math.random(),
+    delta: Math.random() * 0.02 + 0.01
+  });
+}
+
+function drawStars() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let star of stars){
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
+    ctx.fill();
+
+    // Twinkle effect
+    star.alpha += star.delta;
+    if(star.alpha > 1 || star.alpha < 0) star.delta = -star.delta;
+  }
+  requestAnimationFrame(drawStars);
+}
+
+drawStars();
+
+// Resize canvas on window resize
+window.addEventListener('resize', () => {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+});
+
+</script>
+<script>
+/* -------- PAGE 4 PETAL / DOT ANIMATION -------- */
+
+const canvas4 = document.getElementById("page4-canvas");
+const ctx3 = canvas4.getContext("2d");
+
+function resizePage4Canvas() {
+  canvas4.width = window.innerWidth;
+  canvas4.height = window.innerHeight;
+}
+resizePage4Canvas();
+window.addEventListener("resize", resizePage4Canvas);
+
+let petals = [];
+
+/* Create petals */
+function addPetal() {
+  petals.push({
+    x: Math.random() * canvas4.width,
+    y: -20,
+    size: Math.random() * 3 + 2,
+    speed: Math.random() * 0.6 + 0.4,
+    drift: Math.random() * 0.6 - 0.3,
+    alpha: Math.random() * 0.5 + 0.3
+  });
+}
+
+/* Animate petals */
+function animatePetals() {
+  ctx3.clearRect(0, 0, canvas4.width, canvas4.height);
+
+  if (Math.random() < 0.35) addPetal();
+
+  petals.forEach(p => {
+    p.y += p.speed;
+    p.x += p.drift;
+
+    ctx3.beginPath();
+    ctx3.fillStyle = `rgba(255, 185, 210, ${p.alpha})`; // soft pink
+    ctx3.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx3.fill();
+  });
+
+  petals = petals.filter(p => p.y < canvas4.height + 20);
+  requestAnimationFrame(animatePetals);
+}
+
+animatePetals();
+
+/* -------- TOGGLE VISIBILITY (CALL THIS) -------- */
+/*
+Call this function when page changes.
+Page 4 index = 3
+*/
+function togglePage4Animation(currentPageIndex) {
+  if (currentPageIndex === 4) {
+    canvas4.classList.add("active");
+  } else {
+    canvas4.classList.remove("active");
+  }
+}
+</script>
+
+<script>
+// Stop cover animations when page flips
+
+pages.forEach((page, index) => {
+  const next = page.querySelector(".next-btn");
+  if (next) {
+    next.addEventListener("click", () => {
+      if (current === 0) {
+        const video = document.querySelector(".author-vdo");
+        if (video) video.pause();
+      }
+      
+    });
+  }
+});
+</script>
+
+
+
+</body>
+</html>
