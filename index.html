@@ -13,13 +13,17 @@
   --text: #1e1e2f;
   --accent: #8b7bbd;
 }
+html,body {
+  overflow-x: hidden;
+}
 
 /* BODY  */
 body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100svh;
   margin: 0;
   font-family: 'Lora', serif;
   background: black;
@@ -41,7 +45,8 @@ body {
 .book {
   width: 80vw;
   max-width: 900px;
-  height: 80vh;
+  min-height: 90vh;
+  min-height: 90svh;
   position: relative;
   transform-style: preserve-3d;
 
@@ -356,6 +361,21 @@ h1, h2, h3 {
   transform: translateY(-40px); /* move UP */
   object-fit: cover;
 }
+.author2-vdo {
+  width: 180px;          /* or responsive value */
+  height: auto;
+  display: block;
+  background: transparent;
+}
+
+/* Style the fallback image */
+.author2-vdo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
 
 /* PAGE 3 UNPUBLISHED WORKS SLIDER */
 
@@ -363,7 +383,7 @@ h1, h2, h3 {
   position: relative;
   width: 100%;
   max-width: 850px;
-  height: 420px;
+  height: 400px;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -448,7 +468,7 @@ h1, h2, h3 {
   position: relative;
   width: 240px;
   height: 170px;
-  margin: 40px auto;
+  margin: 10px auto;
 }
 
 /* BASE */
@@ -629,8 +649,8 @@ h1, h2, h3 {
 }
 
 .mother-img {
-  width: 320px;
-  height: 270px;
+  width: 300px;
+  height: 250px;
   display: block;
   filter: brightness(1);
   transition: filter 2s ease;
@@ -677,7 +697,8 @@ h1, h2, h3 {
   position: fixed;
   inset: 0;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100svh;
 
   pointer-events: none;
   z-index: 1;
@@ -751,7 +772,8 @@ h1, h2, h3 {
   /* BOOK */
   .book {
     width: 90vw;
-    height: 86vh;
+    min-height: 88vh;
+    min-height: 88svh;
     margin: 0;
     transform: translateY(2%);
   }
@@ -1140,7 +1162,8 @@ h1, h2, h3 {
 
   .book {
     width: 85vw;
-    height: 85vh;
+    min-height: 85vh;
+    min-height: 85svh;
     margin: 0 auto;
     transform: translateY(0);
   }
@@ -1315,7 +1338,8 @@ h1, h2, h3 {
 
   .book {
     width: 80vw;
-    height: 80vh;
+    min-height: 80vh;
+    min-height: 80svh;
   }
 
   #winter-field {
@@ -1465,7 +1489,7 @@ h1, h2, h3 {
         </div>   
       </div>
         <div class="hero-right-video">
-          <video src="images/cover_page/avatar_cover_video.webm" class="author-vdo" autoplay loop muted playsinline>
+          <video src="images/index/avatar1.webm" class="author-vdo" autoplay loop muted playsinline>
         </div>
 
     </div>
@@ -1496,7 +1520,7 @@ h1, h2, h3 {
           </p>
         </div>
         <div class="hero-right2">
-          <img src="images/author_img.jpg" class="author-img">
+          <img src="images/index/author_img.jpg" class="author-img">
         </div>
       </div>
       <button class="nav-btn next-btn">Next</button>
@@ -1515,7 +1539,7 @@ h1, h2, h3 {
         <h2>Books</h2>
 
         <div class="book1 book-1">
-          <img src="images/book-1_cover.jpg" class="img-book" alt="The Pendulum Petals">
+          <img src="images/index/book-1_cover.jpg" class="img-book" alt="The Pendulum Petals">
 
           <div class="book-text">
             <h3>The Pendulum Petals</h3>
@@ -1545,7 +1569,7 @@ h1, h2, h3 {
         <div class="poem-content">
           <h3><a href="poems.html#poem-1" class="btn-poem">Title : Bound by Obedience</a></h3>
           <div class="mother-cage-container">
-            <img src="images/mother-child.jpeg" alt="Mother carrying child" class="mother-img">
+            <img src="images/index/mother-child.jpeg" alt="Mother carrying child" class="mother-img">
 
             <!-- Cage overlay -->
             <div class="cage">
@@ -1625,7 +1649,7 @@ h1, h2, h3 {
     I think that’s enough flexing for the introduction, let's keep the rest of my talents hidden. <br> 
       </p>
         <div class="page2-video">
-          <video src="images/avatar2.webm" class="author2-vdo" autoplay loop muted playsinline>
+          <video src="images/index/avatar2.webm" class="author2-vdo" autoplay loop muted playsinline>
         </div>
       <button class="nav-btn prev-btn">Previous</button>
       <button class="nav-btn next-btn">Next</button>
@@ -1664,7 +1688,7 @@ h1, h2, h3 {
       <p id="formStatus" class="form-status"></p>
     </div>
     <div class="page4-video">
-          <video src="images/avatar3.webm" class="author3-vdo" autoplay loop muted playsinline>
+          <video src="images/index/avatar3.webm" class="author3-vdo" autoplay loop muted playsinline>
       </div>
 
     <button class="nav-btn prev-btn">Previous</button>
@@ -2005,8 +2029,5 @@ pages.forEach((page, index) => {
   }
 });
 </script>
-
-
-
 </body>
 </html>
